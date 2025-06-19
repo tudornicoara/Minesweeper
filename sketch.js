@@ -169,13 +169,17 @@ function mousePressed() {
                         setNeighborNumbers();
                     } while (cells[index].bomb || cells[index].number !== 0);
                 }
-                if (cells[index].bomb) {
-                    revealAllCells();
-                    GAMEOVER = true;
+                if (cells[index].revealed) {
+                    pressRevealedCell(cells[index]);
                 } else {
-                    cells[index].revealed = true;
-                    if (cells[index].number === 0) {
-                        revealNeighbors(cells[index]);
+                    if (cells[index].bomb) {
+                        revealAllCells();
+                        GAMEOVER = true;
+                    } else {
+                        cells[index].revealed = true;
+                        if (cells[index].number === 0) {
+                            revealNeighbors(cells[index]);
+                        }
                     }
                 }
             }
@@ -202,6 +206,29 @@ function revealNeighbors(cell) {
             }
         }
     });
+}
+
+function pressRevealedCell(cell) {
+    if (!cell.revealed)
+        return;
+
+    let neighbors = getNeighbors(cell);
+    let flaggedNeighbors = neighbors.filter(neighbor => neighbor.flagged);
+    if (cell.number > 0 && flaggedNeighbors.length === cell.number) {
+        neighbors.forEach(neighbor => {
+            if (!neighbor.revealed && !neighbor.flagged) {
+                if (neighbor.bomb) {
+                    revealAllCells();
+                    GAMEOVER = true;
+                } else {
+                    neighbor.revealed = true;
+                    if (neighbor.number === 0) {
+                        revealNeighbors(neighbor);
+                    }
+                }
+            }
+        })
+    }
 }
 
 function gameWon() {
