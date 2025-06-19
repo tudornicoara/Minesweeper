@@ -299,13 +299,13 @@ function resetGame() {
 }
 
 function extractValues() {
-    CANVASWIDTH = parseInt(document.getElementById('canvasWidth').value, 10);
-    CANVASHEIGHT = parseInt(document.getElementById('canvasHeight').value, 10);
     CELLWIDTH = parseInt(document.getElementById('cellWidth').value, 10);
     CELLHEIGHT = parseInt(document.getElementById('cellHeight').value, 10);
     CELLSONROW = parseInt(document.getElementById('cellsOnRow').value, 10);
     CELLSONCOLUMN = parseInt(document.getElementById('cellsOnColumn').value, 10);
     BOMBSNUMBER = parseInt(document.getElementById('bombsNumber').value, 10);
+    CANVASWIDTH = CELLWIDTH * CELLSONROW;
+    CANVASHEIGHT = CELLHEIGHT * CELLSONCOLUMN;
 }
 
 function displayWin() {
