@@ -16,7 +16,7 @@ function setup() {
 }
 
 function draw() {
-    background(220);
+    background(THEME.current === 'dark' ? color(25, 25, 45) : color(200, 205, 215));
     cells.forEach(cell => {
         cell.show();
     });
