@@ -99,17 +99,6 @@
     <button type="button" id="sheet-toggle" onclick="openSheet()" aria-label="Settings">⚙ ▲</button>
 </nav>
 
-<script>
-    function openSheet()  { document.body.classList.add('sheet-open'); }
-    function closeSheet() { document.body.classList.remove('sheet-open'); }
-</script>
-<script src="theme.js"></script>
-<script src="cell.js"></script>
-<script src="grid.js"></script>
-<script src="game.js"></script>
-<script src="sketch.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', initTheme);
-</script>
+<script type="module" src="/src/main.ts"></script>
 </body>
 </html>
