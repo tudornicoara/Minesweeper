@@ -7,6 +7,16 @@ function initTheme() {
     document.documentElement.setAttribute('data-theme', THEME.current);
 }
 
+function stepField(id, delta) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const min = el.min !== '' ? parseInt(el.min, 10) : -Infinity;
+    const max = el.max !== '' ? parseInt(el.max, 10) : Infinity;
+    let value = (parseInt(el.value, 10) || 0) + delta;
+    value = Math.max(min, Math.min(max, value));
+    el.value = value;
+}
+
 function toggleTheme() {
     THEME.current = THEME.current === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', THEME.current);

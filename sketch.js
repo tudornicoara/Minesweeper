@@ -6,6 +6,7 @@ let CELLSONROW = 20;
 let CELLSONCOLUMN = 20;
 let BOMBSNUMBER = 100;
 let GAMEOVER = false;
+let gameoverAt = null;
 
 let cells = [];
 
@@ -17,15 +18,26 @@ function setup() {
 
 function draw() {
     background(THEME.current === 'dark' ? color(25, 25, 45) : color(200, 205, 215));
-    cells.forEach(cell => {
-        cell.show();
-    });
+
+    if (GAMEOVER && gameoverAt === null) gameoverAt = millis();
+    if (!GAMEOVER) gameoverAt = null;
+
+    const won = GAMEOVER && gameWon();
+    const elapsed = gameoverAt === null ? 0 : millis() - gameoverAt;
+    const progress = gameoverAt === null ? 0 : constrain(elapsed / 350, 0, 1);
+
+    push();
+    // Screen shake on loss, decaying over ~400ms.
+    if (GAMEOVER && !won) {
+        const shake = Math.max(0, 1 - elapsed / 400) * 8;
+        translate(random(-shake, shake), random(-shake, shake));
+    }
+    cells.forEach(cell => cell.show());
+    pop();
 
     if (GAMEOVER) {
-        if (gameWon())
-            displayWin();
-        else
-            displayLoss();
+        if (won) displayWin(progress);
+        else displayLoss(progress);
     }
 
     fill(0);

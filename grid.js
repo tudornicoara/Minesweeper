@@ -53,6 +53,8 @@ function resetCells() {
         cell.revealed = false;
         cell.flagged = false;
         cell.number = 0;
+        cell.revealedAt = null;
+        cell.flaggedAt = null;
     });
 }
 

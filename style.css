@@ -156,25 +156,63 @@ body {
     white-space: nowrap;
 }
 
-.field input {
-    width: 72px;
-    padding: 6px 8px;
+.stepper {
+    display: flex;
+    align-items: stretch;
     background: var(--input-bg);
     border: 1px solid var(--input-border);
-    border-radius: 6px;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.stepper:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(233, 69, 96, 0.2);
+}
+
+.stepper .step {
+    width: 26px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+    user-select: none;
+}
+
+.stepper .step:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+.stepper .step:active {
+    transform: scale(0.9);
+}
+
+.field input {
+    width: 56px;
+    padding: 6px 4px;
+    background: transparent;
+    border: none;
     color: var(--text);
     font-size: 13px;
-    text-align: right;
+    font-weight: 600;
+    text-align: center;
     outline: none;
-    transition: border-color 0.15s;
 }
 
-.field input:focus {
-    border-color: var(--accent);
+.field input::-webkit-inner-spin-button,
+.field input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
-.field input::-webkit-inner-spin-button {
-    opacity: 0.4;
+.field input[type="number"] {
+    -moz-appearance: textfield;
 }
 
 .theme-toggle {

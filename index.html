@@ -30,7 +30,7 @@
             <h2>Actions</h2>
             <div class="button-group">
                 <button type="button" onclick="resetGame()" class="btn btn-primary">↺ Reset</button>
-                <button type="button" onclick="revealRandomBomb()" class="btn btn-secondary">💡 Hint</button>
+                <button type="button" onclick="hint()" class="btn btn-secondary">💡 Hint</button>
                 <button type="button" onclick="revealAllBombs()" class="btn btn-secondary">👁 Cheat</button>
                 <button type="button" onclick="revealAllCells()" class="btn btn-ghost">Reveal All</button>
                 <button type="button" onclick="win()" class="btn btn-ghost">Auto Win</button>
@@ -42,23 +42,43 @@
             <div class="fields">
                 <div class="field">
                     <label for="cellWidth">Cell Width</label>
-                    <input id="cellWidth" type="number" value="40" min="10" max="120">
+                    <div class="stepper">
+                        <button type="button" class="step" onclick="stepField('cellWidth', -1)" aria-label="Decrease">−</button>
+                        <input id="cellWidth" type="number" value="40" min="10" max="120" step="2">
+                        <button type="button" class="step" onclick="stepField('cellWidth', 1)" aria-label="Increase">+</button>
+                    </div>
                 </div>
                 <div class="field">
                     <label for="cellHeight">Cell Height</label>
-                    <input id="cellHeight" type="number" value="40" min="10" max="120">
+                    <div class="stepper">
+                        <button type="button" class="step" onclick="stepField('cellHeight', -1)" aria-label="Decrease">−</button>
+                        <input id="cellHeight" type="number" value="40" min="10" max="120" step="2">
+                        <button type="button" class="step" onclick="stepField('cellHeight', 1)" aria-label="Increase">+</button>
+                    </div>
                 </div>
                 <div class="field">
                     <label for="cellsOnRow">Columns</label>
-                    <input id="cellsOnRow" type="number" value="20" min="2" max="100">
+                    <div class="stepper">
+                        <button type="button" class="step" onclick="stepField('cellsOnRow', -1)" aria-label="Decrease">−</button>
+                        <input id="cellsOnRow" type="number" value="20" min="2" max="100">
+                        <button type="button" class="step" onclick="stepField('cellsOnRow', 1)" aria-label="Increase">+</button>
+                    </div>
                 </div>
                 <div class="field">
                     <label for="cellsOnColumn">Rows</label>
-                    <input id="cellsOnColumn" type="number" value="20" min="2" max="100">
+                    <div class="stepper">
+                        <button type="button" class="step" onclick="stepField('cellsOnColumn', -1)" aria-label="Decrease">−</button>
+                        <input id="cellsOnColumn" type="number" value="20" min="2" max="100">
+                        <button type="button" class="step" onclick="stepField('cellsOnColumn', 1)" aria-label="Increase">+</button>
+                    </div>
                 </div>
                 <div class="field">
                     <label for="bombsNumber">Bombs</label>
-                    <input id="bombsNumber" type="number" value="60" min="1" max="9999">
+                    <div class="stepper">
+                        <button type="button" class="step" onclick="stepField('bombsNumber', -5)" aria-label="Decrease">−</button>
+                        <input id="bombsNumber" type="number" value="60" min="1" max="9999" step="5">
+                        <button type="button" class="step" onclick="stepField('bombsNumber', 5)" aria-label="Increase">+</button>
+                    </div>
                 </div>
                 <div class="toggle-row">
                     <label for="noGuessing">No Guessing</label>

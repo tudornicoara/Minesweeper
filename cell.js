@@ -42,43 +42,72 @@ function Cell() {
     this.revealed = false;
     this.number = 0;
     this.flagged = false;
+    this.revealedAt = null;
+    this.flaggedAt = null;
+
+    // Eased 0..1 progress since `at`, over `dur` ms. Returns 1 when not started.
+    function anim(at, dur) {
+        if (at === null) return 1;
+        return easeOutBack(constrain((millis() - at) / dur, 0, 1));
+    }
 
     this.show = function() {
         const p = PALETTES[THEME.current];
+        const cx = this.x + this.w / 2;
+        const cy = this.y + this.h / 2;
+
+        // Track transitions so reveal/flag pop wherever the flags get set.
+        if (this.revealed && this.revealedAt === null) this.revealedAt = millis();
+        if (this.flagged && this.flaggedAt === null) this.flaggedAt = millis();
+        if (!this.flagged) this.flaggedAt = null;
 
         if (this.flagged) {
             fill(...p.unrevealed);
             rect(this.x, this.y, this.w, this.h);
+            const fs = anim(this.flaggedAt, 200);
+            push();
+            translate(cx, cy);
+            drawingContext.scale(fs, fs);
             fill(255, 0, 0);
             textAlign(CENTER, CENTER);
             textSize(16);
-            text('🚩', this.x + this.w / 2, this.y + this.h / 2);
+            text('🚩', 0, 0);
+            pop();
             return;
         }
+
         if (!this.revealed) {
             fill(...p.unrevealed);
             rect(this.x, this.y, this.w, this.h);
+            return;
         }
-        if (this.revealed && !this.bomb && this.number === 0) {
-            fill(...p.revealedEmpty);
-            rect(this.x, this.y, this.w, this.h);
-        }
-        if (this.revealed && this.bomb) {
+
+        // Revealed: pop the content in from the cell center.
+        const s = anim(this.revealedAt, 180);
+        push();
+        translate(cx, cy);
+        drawingContext.scale(s, s);
+        translate(-cx, -cy);
+
+        if (this.bomb) {
             fill(...p.bomb);
             rect(this.x, this.y, this.w, this.h);
             textAlign(CENTER, CENTER);
             textSize(20);
-            text('💣', this.x + this.w / 2, this.y + this.h / 2);
-        }
-        if (this.revealed && !this.bomb && this.number > 0) {
+            text('💣', cx, cy);
+        } else if (this.number === 0) {
+            fill(...p.revealedEmpty);
+            rect(this.x, this.y, this.w, this.h);
+        } else {
             fill(...p.revealedEmpty);
             rect(this.x, this.y, this.w, this.h);
             fill(getColor(this.number));
             textAlign(CENTER, CENTER);
             textSize(16);
             textStyle(BOLD);
-            text(this.number, this.x + this.w / 2, this.y + this.h / 2);
+            text(this.number, cx, cy);
         }
+        pop();
     };
 
     this.setPosition = function(x, y) {
