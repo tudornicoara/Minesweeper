@@ -47,11 +47,16 @@ function mousePressed() {
         } else if (mouseButton === LEFT) {
             if (!cells[index].flagged) {
                 if (cells.every(cell => !cell.revealed)) {
+                    let attempts = 0;
                     do {
-                        resetCells();
-                        placeBombs();
-                        setNeighborNumbers();
-                    } while (cells[index].bomb || cells[index].number !== 0);
+                        do {
+                            resetCells();
+                            placeBombs();
+                            setNeighborNumbers();
+                        } while (cells[index].bomb || cells[index].number !== 0);
+                        attempts++;
+                    } while (document.getElementById('noGuessing').checked &&
+                             !canSolveWithoutGuessing(index) && attempts < 500);
                 }
                 if (cells[index].revealed) {
                     pressRevealedCell(cells[index]);
