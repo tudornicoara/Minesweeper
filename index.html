@@ -3,28 +3,59 @@
 <head>
     <title>Minesweeper</title>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.11.7/lib/p5.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.7/lib/addons/p5.sound.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<main>
-</main>
+<div id="app">
+    <main id="canvas-container"></main>
+
+    <aside id="panel">
+        <h1>💣 Minesweeper</h1>
+
+        <section class="section">
+            <h2>Actions</h2>
+            <div class="button-group">
+                <button type="button" onclick="resetGame()" class="btn btn-primary">↺ Reset</button>
+                <button type="button" onclick="revealRandomBomb()" class="btn btn-secondary">💡 Hint</button>
+                <button type="button" onclick="revealAllBombs()" class="btn btn-secondary">👁 Cheat</button>
+                <button type="button" onclick="revealAllCells()" class="btn btn-ghost">Reveal All</button>
+                <button type="button" onclick="win()" class="btn btn-ghost">Auto Win</button>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Settings</h2>
+            <div class="fields">
+                <div class="field">
+                    <label for="cellWidth">Cell Width</label>
+                    <input id="cellWidth" type="number" value="40" min="10" max="120">
+                </div>
+                <div class="field">
+                    <label for="cellHeight">Cell Height</label>
+                    <input id="cellHeight" type="number" value="40" min="10" max="120">
+                </div>
+                <div class="field">
+                    <label for="cellsOnRow">Columns</label>
+                    <input id="cellsOnRow" type="number" value="20" min="2" max="100">
+                </div>
+                <div class="field">
+                    <label for="cellsOnColumn">Rows</label>
+                    <input id="cellsOnColumn" type="number" value="20" min="2" max="100">
+                </div>
+                <div class="field">
+                    <label for="bombsNumber">Bombs</label>
+                    <input id="bombsNumber" type="number" value="60" min="1" max="9999">
+                </div>
+            </div>
+        </section>
+    </aside>
+</div>
+
+<script src="cell.js"></script>
+<script src="grid.js"></script>
+<script src="game.js"></script>
 <script src="sketch.js"></script>
-<button onclick="revealAllCells()">Reveal</button>
-<button onclick="resetGame()">Reset</button>
-<button onclick="revealRandomBomb()">Hint</button>
-<button onclick="revealAllBombs()">Cheat</button>
-<button onclick="win()">Win</button>
-<br/>
-<label>Cell Width: <input id="cellWidth" type="number" value="40"></label>
-<br/>
-<label>Cell Height: <input id="cellHeight" type="number" value="40"></label>
-<br/>
-<label>Cells on Row: <input id="cellsOnRow" type="number" value="20"></label>
-<br/>
-<label>Cells on Column: <input id="cellsOnColumn" type="number" value="20"></label>
-<br/>
-<label>Bombs Number: <input id="bombsNumber" type="number" value="50"></label>
 </body>
 </html>

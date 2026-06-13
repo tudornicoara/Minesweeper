@@ -1,8 +1,144 @@
-html, body {
+*, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-canvas {
+body {
+    background: #252542;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+}
+
+#app {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 24px;
+    min-height: 100vh;
+}
+
+#canvas-container canvas {
     display: block;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+#panel {
+    width: 220px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+#panel h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.section {
+    background: #16213e;
+    border: 1px solid #0f3460;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.section h2 {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #7a8ba0;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.btn {
+    width: 100%;
+    padding: 9px 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: filter 0.15s, transform 0.1s;
+    text-align: center;
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+.btn:hover {
+    filter: brightness(1.15);
+}
+
+.btn-primary {
+    background: #e94560;
+    color: #fff;
+}
+
+.btn-secondary {
+    background: #0f3460;
+    color: #a8c4e0;
+    border: 1px solid #1a4a7a;
+}
+
+.btn-ghost {
+    background: transparent;
+    color: #8a9aaa;
+    border: 1px solid #2a3a4a;
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.fields {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.field label {
+    font-size: 13px;
+    color: #a0b0c0;
+    white-space: nowrap;
+}
+
+.field input {
+    width: 72px;
+    padding: 6px 8px;
+    background: #0d1b2a;
+    border: 1px solid #0f3460;
+    border-radius: 6px;
+    color: #e0e0e0;
+    font-size: 13px;
+    text-align: right;
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.field input:focus {
+    border-color: #e94560;
+}
+
+.field input::-webkit-inner-spin-button {
+    opacity: 0.4;
 }
