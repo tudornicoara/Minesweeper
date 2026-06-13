@@ -36,8 +36,10 @@ const PALETTES = {
 function Cell() {
     this.x = 0;
     this.y = 0;
-    this.w = CELLWIDTH;
-    this.h = CELLHEIGHT;
+    this.col = 0;
+    this.row = 0;
+    this.w = CELLW;
+    this.h = CELLH;
     this.bomb = false;
     this.revealed = false;
     this.number = 0;
@@ -70,7 +72,7 @@ function Cell() {
             drawingContext.scale(fs, fs);
             fill(255, 0, 0);
             textAlign(CENTER, CENTER);
-            textSize(16);
+            textSize(Math.min(this.w, this.h) * 0.55);
             text('🚩', 0, 0);
             pop();
             return;
@@ -93,7 +95,7 @@ function Cell() {
             fill(...p.bomb);
             rect(this.x, this.y, this.w, this.h);
             textAlign(CENTER, CENTER);
-            textSize(20);
+            textSize(Math.min(this.w, this.h) * 0.6);
             text('💣', cx, cy);
         } else if (this.number === 0) {
             fill(...p.revealedEmpty);
@@ -103,7 +105,7 @@ function Cell() {
             rect(this.x, this.y, this.w, this.h);
             fill(getColor(this.number));
             textAlign(CENTER, CENTER);
-            textSize(16);
+            textSize(Math.min(this.w, this.h) * 0.55);
             textStyle(BOLD);
             text(this.number, cx, cy);
         }

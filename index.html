@@ -18,7 +18,10 @@
 <div id="app">
     <main id="canvas-container"></main>
 
+    <div id="scrim" onclick="closeSheet()"></div>
+
     <aside id="panel">
+        <button type="button" id="sheet-close" class="sheet-close" onclick="closeSheet()" aria-label="Close settings">▼</button>
         <h1>💣 Minesweeper</h1>
         <button type="button" class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
             <span class="toggle-moon">🌙</span>
@@ -89,6 +92,17 @@
     </aside>
 </div>
 
+<nav id="mobile-bar">
+    <button type="button" onclick="resetGame()" aria-label="Reset">↺</button>
+    <button type="button" onclick="hint()" aria-label="Hint">💡</button>
+    <span id="flag-count">🚩 0/0</span>
+    <button type="button" id="sheet-toggle" onclick="openSheet()" aria-label="Settings">⚙ ▲</button>
+</nav>
+
+<script>
+    function openSheet()  { document.body.classList.add('sheet-open'); }
+    function closeSheet() { document.body.classList.remove('sheet-open'); }
+</script>
 <script src="theme.js"></script>
 <script src="cell.js"></script>
 <script src="grid.js"></script>

@@ -2,7 +2,11 @@ function placeCells() {
     for (let i = 0; i < CELLSONCOLUMN; i++) {
         for (let j = 0; j < CELLSONROW; j++) {
             let cell = new Cell();
-            cell.setPosition(j * CELLWIDTH, i * CELLHEIGHT);
+            cell.col = j;
+            cell.row = i;
+            cell.w = CELLW;
+            cell.h = CELLH;
+            cell.setPosition(j * CELLW, i * CELLH);
             cells.push(cell);
         }
     }
@@ -30,8 +34,8 @@ function setNeighborNumbers() {
 
 function getNeighbors(cell) {
     let neighbors = [];
-    let x = cell.x / CELLWIDTH;
-    let y = cell.y / CELLHEIGHT;
+    let x = cell.col;
+    let y = cell.row;
 
     for (let i = -1; i <= 1; i++) {
         for (let j = -1; j <= 1; j++) {

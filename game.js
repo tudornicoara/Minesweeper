@@ -173,8 +173,15 @@ function extractValues() {
 function resetGame() {
     GAMEOVER = false;
     extractValues();
+    computeFit();
     cells = [];
-    setup();
+    if (cnv) {
+        resizeCanvas(CANVASWIDTH, CANVASHEIGHT);
+    } else {
+        cnv = createCanvas(CANVASWIDTH, CANVASHEIGHT);
+        cnv.parent('canvas-container');
+    }
+    placeCells();
 }
 
 function displayOverlay(bgColor, borderColor, message, progress) {
