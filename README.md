@@ -2,6 +2,8 @@
 
 A Minesweeper game built with TypeScript and [p5.js](https://p5js.org/), bundled with Vite.
 
+Check it out on **https://tudornicoara.github.io/Minesweeper/**
+
 ## Features
 
 - Light/dark mode — toggleable, persists via `localStorage`, respects `prefers-color-scheme`
