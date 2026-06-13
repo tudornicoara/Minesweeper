@@ -196,6 +196,7 @@ export function extractValues(): void {
 
 export function resetGame(): void {
   state.GAMEOVER = false;
+  state.confetti = [];
   extractValues();
   computeFit();
   state.cells = [];

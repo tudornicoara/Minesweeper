@@ -20,6 +20,8 @@ declare global {
   function push(): void;
   function pop(): void;
   function translate(x: number, y: number): void;
+  function rotate(angle: number): void;
+  function rectMode(mode: any): void;
   function color(...args: any[]): p5.Color;
   function random(): number;
   function random(max: number): number;

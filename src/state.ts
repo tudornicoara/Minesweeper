@@ -1,5 +1,6 @@
 import type p5 from 'p5';
 import type { Cell } from './cell';
+import type { Confetto } from './confetti';
 
 export interface TouchInfo {
   index: number;
@@ -28,4 +29,5 @@ export const state = {
   touchInfo: null as TouchInfo | null,
   longPressTimer: null as number | null,
   cells: [] as Cell[],
+  confetti: [] as Confetto[],
 };

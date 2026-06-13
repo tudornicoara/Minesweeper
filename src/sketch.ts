@@ -11,6 +11,7 @@ import {
   resetGame,
   extractValues,
 } from './game';
+import { spawnConfetti, drawConfetti } from './confetti';
 
 export function setup(): void {
   extractValues();
@@ -55,10 +56,14 @@ function repositionCells(): void {
 export function draw(): void {
   background(THEME.current === 'dark' ? color(25, 25, 45) : color(200, 205, 215));
 
-  if (state.GAMEOVER && state.gameoverAt === null) state.gameoverAt = millis();
+  const won = state.GAMEOVER && gameWon();
+
+  if (state.GAMEOVER && state.gameoverAt === null) {
+    state.gameoverAt = millis();
+    if (won) spawnConfetti(); // fire once, when the win is first detected
+  }
   if (!state.GAMEOVER) state.gameoverAt = null;
 
-  const won = state.GAMEOVER && gameWon();
   const elapsed = state.gameoverAt === null ? 0 : millis() - state.gameoverAt;
   const progress = state.gameoverAt === null ? 0 : constrain(elapsed / 350, 0, 1);
 
@@ -75,6 +80,8 @@ export function draw(): void {
     if (won) displayWin(progress);
     else displayLoss(progress);
   }
+
+  drawConfetti(); // falls in front of the win overlay
 
   updateFlagCount();
   fill(0);
