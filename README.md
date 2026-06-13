@@ -1,46 +1,58 @@
 # Minesweeper (p5.js)
 
-A simple Minesweeper game implemented in JavaScript using the [p5.js](https://p5js.org/) library.
+A Minesweeper game built with TypeScript and [p5.js](https://p5js.org/), bundled with Vite.
 
 ## Features
 
-- Adjustable grid size, cell size, and number of bombs via UI controls
-- Left-click to reveal cells, right-click to flag bombs
-- Win and loss detection with visual feedback
-- Hint, reveal, and cheat buttons for gameplay assistance
-- Responsive canvas and clean UI
+- Light/dark mode — toggleable, persists via `localStorage`, respects `prefers-color-scheme`
+- No-guessing mode — board generated to be solvable without guessing
+- Mobile support — bottom nav bar with quick actions; settings open as a bottom sheet
+- Adjustable columns, rows, cell size, and bomb count
+- Left-click to reveal, right-click to flag
+- Win/loss detection with confetti on win
+- Hint, cheat, reveal all, and auto-win buttons
 
 ## Getting Started
 
-1. **Clone or download this repository.**
-2. **Open `index.html` in your web browser.**
+```bash
+npm install
+npm run dev
+```
 
-No build step or server is required.
+Open `http://localhost:5173` in your browser.
+
+To build for production:
+
+```bash
+npm run build
+```
 
 ## Controls
 
-- **Left-click:** Reveal a cell
-- **Right-click:** Flag or unflag a cell
-- **Reveal:** Reveal all cells
-- **Reset:** Start a new game with current settings
-- **Hint:** Flag a random bomb with at least one revealed neighbor
-- **Cheat:** Flag all bombs
-- **Win:** Instantly win the game
+| Input | Action |
+|---|---|
+| Left-click | Reveal cell |
+| Right-click | Flag / unflag cell |
+| Reset (↺) | New game with current settings |
+| Hint (💡) | Flag a deducible bomb |
+| Cheat (👁) | Flag all bombs |
+| Reveal All | Reveal every cell |
+| Auto Win | Instantly win |
 
-## Customization
+## Settings
 
-Adjust the following parameters using the input fields below the canvas:
+Accessible via the side panel (desktop) or bottom sheet (mobile):
 
-- Canvas Width / Height
-- Cell Width / Height
-- Cells on Row / Column
-- Bombs Number
+- **Cell Width / Height** — cell size in pixels
+- **Columns / Rows** — grid dimensions
+- **Bombs** — bomb count
+- **No Guessing** — regenerate board until it requires no guessing to solve
 
-Click **Reset** after changing values to apply them.
+## Tech Stack
 
-## Dependencies
-
-- [p5.js](https://p5js.org/) (loaded via CDN)
+- TypeScript + p5.js (global mode)
+- Vite (dev server + bundler)
+- CSS custom properties for theming
 
 ## License
 
