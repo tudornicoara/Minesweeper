@@ -21,8 +21,6 @@ const COLORS = [
   [255, 255, 255],
 ];
 
-// Launch a burst of confetti from the top of the canvas. Called once when the
-// player wins; particles then fall under gravity and are cleared on reset.
 export function spawnConfetti(): void {
   const count = 160;
   state.confetti = [];
